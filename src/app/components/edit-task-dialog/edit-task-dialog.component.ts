@@ -13,7 +13,6 @@ export class EditTaskDialogComponent {
     public dialogRef: MatDialogRef<EditTaskDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { task: Task }
   ) {
-    // Shallow copy to avoid direct mutation until save
     this.task = { ...data.task };
   }
 
