@@ -1,0 +1,65 @@
+<!-- Toolbar -->
+<div class="toolbar">
+    <!-- CRUD + Misc Buttons -->
+    <button mat-raised-button color="primary" (click)="createNewTask()">New Task</button>
+    <button mat-raised-button color="warn" (click)="deleteSelectedTask()">Delete</button>
+    <button mat-raised-button (click)="refreshTasks()">Refresh</button>
+    <button mat-raised-button (click)="applyFilter()">Filter</button>
+    <button mat-raised-button (click)="editSelectedTask()">Edit</button>
+    <button mat-raised-button (click)="toggleView()">
+        {{ isTableView ? 'Board View' : 'Table View' }}
+    </button>
+
+    <!-- Hide/Show Columns Dropdown -->
+    <div class="dropdown">
+        <button mat-button (click)="showColumnMenu = !showColumnMenu">
+            Columns ▾
+        </button>
+        <div class="dropdown-menu" *ngIf="showColumnMenu">
+            <mat-checkbox *ngFor="let col of columns" [(ngModel)]="col.visible">
+                {{ col.name }}
+            </mat-checkbox>
+        </div>
+    </div>
+
+    <!-- Export Buttons -->
+    <button mat-icon-button (click)="exportToExcel()" matTooltip="Export to Excel">
+        <mat-icon>description</mat-icon>
+    </button>
+    <button mat-icon-button (click)="exportToCSV()" matTooltip="Export to CSV">
+        <mat-icon>table_chart</mat-icon>
+    </button>
+</div>
+
+<!-- Task Table View -->
+<div *ngIf="isTableView">
+    <table>
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th *ngFor="let col of columns" [hidden]="!col.visible">{{ col.name }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of tasks" [class.selected]="task.id === selectedTaskId" (click)="selectTask(task.id)">
+                <td>
+                    <input type="radio" name="selectedTask" [checked]="task.id === selectedTaskId"
+                        (click)="$event.stopPropagation(); selectTask(task.id)">
+                </td>
+                <td *ngFor="let col of columns" [hidden]="!col.visible">
+                    {{ task[col.key] }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Kanban Board View -->
+<div *ngIf="!isTableView">
+    <app-task-board [tasks]="tasks"></app-task-board>
+</div>
+
+<!-- Logout button -->
+<div style="margin-top: 10px;">
+    <button mat-raised-button color="accent" (click)="logout()">Logout</button>
+</div>
