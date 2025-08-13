@@ -1,5 +1,4 @@
 <div class="toolbar">
-    <!-- Main action buttons -->
     <button mat-raised-button color="primary" (click)="createNewTask.emit()">New Task</button>
     <button mat-raised-button color="warn" (click)="deleteSelectedTask.emit()">Delete</button>
     <button mat-raised-button (click)="refreshTasks.emit()">Refresh</button>
@@ -9,7 +8,6 @@
         {{ isTableView ? 'Board View' : 'Table View' }}
     </button>
 
-    <!-- Column selector menu -->
     <button mat-button [matMenuTriggerFor]="columnsMenu">
         Columns
         <mat-icon style="vertical-align: middle;">keyboard_arrow_down</mat-icon>
@@ -21,7 +19,6 @@
             </mat-checkbox>
         </button>
         <mat-divider></mat-divider>
-        <!-- Only Excel export -->
         <button mat-menu-item (click)="exportToExcel.emit()">
             <mat-icon>description</mat-icon>
             <span>Export to Excel</span>
