@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>Edit Task</h2>
+
+<mat-dialog-content>
+    <!-- Name -->
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="task.name" />
+    </mat-form-field>
+
+    <!-- Progress -->
+    <mat-form-field appearance="fill">
+        <mat-label>Progress</mat-label>
+        <input matInput type="number" [(ngModel)]="task.progress" min="0" max="100" />
+    </mat-form-field>
+
+    <!-- Type Dropdown -->
+    <mat-form-field appearance="fill">
+        <mat-label>Type</mat-label>
+        <mat-select [(ngModel)]="task.type">
+            <mat-option value="feature">Feature</mat-option>
+            <mat-option value="bug">Bug</mat-option>
+            <mat-option value="improvement">Improvement</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <!-- Status Dropdown -->
+    <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="task.status">
+            <mat-option value="todo">To Do</mat-option>
+            <mat-option value="in-progress">In Progress</mat-option>
+            <mat-option value="done">Done</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <!-- Priority Dropdown -->
+    <mat-form-field appearance="fill">
+        <mat-label>Priority</mat-label>
+        <mat-select [(ngModel)]="task.priority">
+            <mat-option value="low">Low</mat-option>
+            <mat-option value="medium">Medium</mat-option>
+            <mat-option value="high">High</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <!-- Owner -->
+    <mat-form-field appearance="fill">
+        <mat-label>Owner</mat-label>
+        <input matInput [(ngModel)]="task.owner" />
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+</mat-dialog-actions>
