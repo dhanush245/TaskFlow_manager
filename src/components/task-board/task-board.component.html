@@ -1,8 +1,0 @@
-<div class="board">
-    <div class="column" *ngFor="let status of statuses">
-        <h3>{{status | titlecase}}</h3>
-        <div *ngFor="let task of getTasksByStatus(status)" class="task-card">
-            {{task.name}} - {{task.owner}}
-        </div>
-    </div>
-</div>
