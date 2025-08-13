@@ -1,19 +1,16 @@
 <h2 mat-dialog-title>Edit Task</h2>
 
 <mat-dialog-content>
-    <!-- Name -->
     <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
         <input matInput [(ngModel)]="task.name" />
     </mat-form-field>
 
-    <!-- Progress -->
     <mat-form-field appearance="fill">
         <mat-label>Progress</mat-label>
         <input matInput type="number" [(ngModel)]="task.progress" min="0" max="100" />
     </mat-form-field>
 
-    <!-- Type Dropdown -->
     <mat-form-field appearance="fill">
         <mat-label>Type</mat-label>
         <mat-select [(ngModel)]="task.type">
@@ -23,7 +20,6 @@
         </mat-select>
     </mat-form-field>
 
-    <!-- Status Dropdown -->
     <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
         <mat-select [(ngModel)]="task.status">
@@ -33,7 +29,6 @@
         </mat-select>
     </mat-form-field>
 
-    <!-- Priority Dropdown -->
     <mat-form-field appearance="fill">
         <mat-label>Priority</mat-label>
         <mat-select [(ngModel)]="task.priority">
@@ -43,7 +38,6 @@
         </mat-select>
     </mat-form-field>
 
-    <!-- Owner -->
     <mat-form-field appearance="fill">
         <mat-label>Owner</mat-label>
         <input matInput [(ngModel)]="task.owner" />
