@@ -19,7 +19,6 @@ export class TaskPageComponent implements OnInit {
   selectedTaskId?: number;
   isDialogOpen = false;
 
-  // Column visibility states
   columns = [
     { name: 'Name', key: 'name', visible: true },
     { name: 'Progress', key: 'progress', visible: true },
@@ -29,7 +28,7 @@ export class TaskPageComponent implements OnInit {
     { name: 'Owner', key: 'owner', visible: true }
   ];
 
-  showColumnMenu = false; // dropdown toggle
+  showColumnMenu = false; 
 
   constructor(
     private taskService: TaskService,
@@ -41,17 +40,14 @@ export class TaskPageComponent implements OnInit {
     this.refreshTasks();
   }
 
-  /** Reload tasks from service */
   refreshTasks() {
     this.tasks = this.taskService.getTasks();
   }
 
-  /** Toggle between board and table view */
   toggleView() {
     this.isTableView = !this.isTableView;
   }
 
-  /** Create a new task */
   createNewTask() {
     const newTask: Task = {
       id: Date.now(),
@@ -66,7 +62,6 @@ export class TaskPageComponent implements OnInit {
     this.refreshTasks();
   }
 
-  /** Delete selected */
   deleteSelectedTask() {
     if (this.selectedTaskId) {
       this.taskService.deleteTask(this.selectedTaskId);
@@ -77,7 +72,6 @@ export class TaskPageComponent implements OnInit {
     }
   }
 
-  /** Filter dialog */
   applyFilter() {
     if (this.isDialogOpen || this.dialog.openDialogs.length > 0) return;
     this.isDialogOpen = true;
@@ -97,7 +91,6 @@ export class TaskPageComponent implements OnInit {
     });
   }
 
-  /** Edit dialog */
   editSelectedTask() {
     if (this.isDialogOpen || this.dialog.openDialogs.length > 0) return;
     if (!this.selectedTaskId) {
@@ -119,22 +112,18 @@ export class TaskPageComponent implements OnInit {
     });
   }
 
-  /** Track selected row */
   selectTask(id: number) {
     this.selectedTaskId = id;
   }
 
-  /** Logout */
   logout() {
     this.auth.logout();
   }
 
-  /** Toggle column visibility from dropdown */
   toggleColumnVisibility(col: any) {
     col.visible = !col.visible;
   }
 
-  /** Export current table data to Excel */
   exportToExcel() {
     const exportData = this.tasks.map(task => {
       const obj: any = {};
@@ -151,7 +140,6 @@ export class TaskPageComponent implements OnInit {
     XLSX.writeFile(wb, 'tasks.xlsx');
   }
 
-  /** Export current table data to CSV */
   exportToCSV() {
     const exportData = this.tasks.map(task => {
       const obj: any = {};
