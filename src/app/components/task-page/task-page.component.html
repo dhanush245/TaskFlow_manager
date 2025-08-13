@@ -1,6 +1,4 @@
-<!-- Toolbar -->
 <div class="toolbar">
-    <!-- CRUD + Misc Buttons -->
     <button mat-raised-button color="primary" (click)="createNewTask()">New Task</button>
     <button mat-raised-button color="warn" (click)="deleteSelectedTask()">Delete</button>
     <button mat-raised-button (click)="refreshTasks()">Refresh</button>
@@ -10,7 +8,6 @@
         {{ isTableView ? 'Board View' : 'Table View' }}
     </button>
 
-    <!-- Hide/Show Columns Dropdown -->
     <div class="dropdown">
         <button mat-button (click)="showColumnMenu = !showColumnMenu">
             Columns ▾
@@ -22,7 +19,6 @@
         </div>
     </div>
 
-    <!-- Export Buttons -->
     <button mat-icon-button (click)="exportToExcel()" matTooltip="Export to Excel">
         <mat-icon>description</mat-icon>
     </button>
@@ -31,7 +27,6 @@
     </button>
 </div>
 
-<!-- Task Table View -->
 <div *ngIf="isTableView">
     <table>
         <thead>
@@ -54,12 +49,10 @@
     </table>
 </div>
 
-<!-- Kanban Board View -->
 <div *ngIf="!isTableView">
     <app-task-board [tasks]="tasks"></app-task-board>
 </div>
 
-<!-- Logout button -->
 <div style="margin-top: 10px;">
     <button mat-raised-button color="accent" (click)="logout()">Logout</button>
 </div>
