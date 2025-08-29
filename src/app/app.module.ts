@@ -51,6 +51,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { LayoutModule } from '@angular/cdk/layout';
 import { BoardViewComponent } from './components/board-view/board-view.component';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { SearchService } from './services/search.service';
@@ -119,7 +120,8 @@ import { ActivateAccountComponent } from './components/activate-account/activate
     MatSnackBarModule,
     MatSlideToggleModule,
     MatSliderModule,
-    DragDropModule
+    DragDropModule,
+    LayoutModule
   ],
   providers: [
     AuthGuard,

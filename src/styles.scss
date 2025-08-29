@@ -684,104 +684,7 @@ button.primary:hover::after { left: 120%; }
 @media (prefers-reduced-motion: reduce) {
     .auth-container, .auth-container::before, .auth-container::after, .auth-card:after,
     button.primary::after { animation: none; transition: none; }
-}
->>>>>>> Stashed changes
-/* ===========================
-   Global Theme Variables
-=========================== */
-$primary-color: #1976d2;
-$primary-dark: #1565c0;
-$accent-color: #0288d1;
-$warn-color: #d32f2f;
-$background-color: #f4f6f8;
-$text-color: #333;
-$card-bg: #ffffff;
-$border-radius: 8px;
-$shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
-$shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
 
-/* ===========================
-   Reset & Base Styles
-=========================== */
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: $background-color;
-    color: $text-color;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-    margin: 0;
-    font-weight: 500;
-}
-
-button {
-    font-family: inherit;
-}
-
-/* ===========================
-   Login Page
-=========================== */
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, $primary-color, $accent-color);
-}
-
-.login-card {
-    background: $card-bg;
-    padding: 30px;
-    border-radius: $border-radius;
-    box-shadow: $shadow-light;
-    width: 400px;
-    max-width: 90%;
-
-    h2 {
-        text-align: center;
-        color: $primary-color;
-        margin-bottom: 20px;
-    }
-
-    mat-form-field {
-        width: 100%;
-        margin-bottom: 15px;
-    }
-
-    .login-actions {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        button {
-            width: 48%;
-        }
-    }
-
-    .google-login {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-
-        button {
-            background: #fff;
-            color: #444;
-            border: 1px solid #ddd;
-            width: 100%;
-            text-transform: none;
-
-            &:hover {
-                box-shadow: $shadow-light;
-            }
-        }
-    }
-}
 
 /* ===========================
    AI Chat Dialog Panel
@@ -1373,4 +1276,4 @@ button.primary:hover::after { left: 120%; }
     .auth-container, .auth-container::before, .auth-container::after, .auth-card:after,
     button.primary::after { animation: none; transition: none; }
 }
->>>>>>> Stashed changes
+
