@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'tasklist';
+  title = 'Task Manager App';
+  isDark = false;
+
+  toggleTheme() {
+    this.isDark = !this.isDark;
+    document.body.classList.toggle('dark-theme', this.isDark);
+  }
 }

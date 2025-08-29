@@ -1,0 +1,42 @@
+<div class="board-container">
+    <div class="board-column" *ngFor="let col of columns; let i = index">
+        <h3>{{ col.title }}</h3>
+
+        <div class="board-dropzone" cdkDropList [id]="'list-' + col.key" [cdkDropListData]="tasksByStatus[col.key]"
+            [cdkDropListConnectedTo]="listIds" (cdkDropListDropped)="drop($event, col.key)">
+            <div class="board-task" *ngFor="let t of tasksByStatus[col.key]" cdkDrag>
+                <div class="board-task-header">
+                    <div class="board-task-title">{{ t.title }}</div>
+                    <div class="board-task-actions">
+                        <button mat-icon-button class="action-btn edit-btn" 
+                                (click)="onEditTask(t, $event)" 
+                                matTooltip="Edit Task">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button class="action-btn delete-btn" 
+                                (click)="onDeleteTask(t.id, $event)" 
+                                matTooltip="Delete Task">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                
+                <p *ngIf="t.description" class="board-task-description">{{ t.description }}</p>
+
+                <div class="board-task-meta">
+                    <span class="status" [ngClass]="{
+            'todo': t.status === 'todo',
+            'in-progress': t.status === 'in-progress',
+            'done': t.status === 'done'
+          }">{{ t.status }}</span>
+
+                    <span class="owner" *ngIf="t.owner">• {{ t.owner }}</span>
+                </div>
+            </div>
+
+            <div class="board-empty" *ngIf="!tasksByStatus[col.key]?.length">
+                Drop tasks here
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+    <span>Task Manager</span>
+
+    <span class="spacer"></span>
+
+    <ng-container *ngIf="isLoggedIn$ | async">
+        <span class="username">Hello, {{ username }}</span>
+        <button mat-button (click)="logout()">Logout</button>
+    </ng-container>
+</mat-toolbar>

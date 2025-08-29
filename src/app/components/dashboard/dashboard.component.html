@@ -1,0 +1,125 @@
+<div class="dashboard-container">
+    <!-- Dashboard View -->
+    <div *ngIf="!isAnalyticsView" class="dashboard-view">
+        <div class="dashboard-header">
+            <h2>Dashboard</h2>
+            <p class="dashboard-subtitle">Welcome back! Here's an overview of your recent tasks.</p>
+        </div>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <mat-icon class="stat-icon">assignment</mat-icon>
+                <div class="stat-content">
+                    <div class="stat-number">{{ recentTasks.length }}</div>
+                    <div class="stat-label">Recent Tasks</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <mat-icon class="stat-icon">pending</mat-icon>
+                <div class="stat-content">
+                    <div class="stat-number">{{ getPendingTasks() }}</div>
+                    <div class="stat-label">Pending</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <mat-icon class="stat-icon">trending_up</mat-icon>
+                <div class="stat-content">
+                    <div class="stat-number">{{ getCompletedTasks() }}</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="recent-tasks-section">
+            <h3>Recent Tasks</h3>
+            <mat-progress-spinner *ngIf="isLoading" mode="indeterminate"></mat-progress-spinner>
+
+            <div class="tasks-grid" *ngIf="!isLoading && recentTasks.length > 0">
+                <div *ngFor="let task of recentTasks" class="task-card" (click)="editTask(task)">
+                    <div class="task-header">
+                        <h4>{{ task.name }}</h4>
+                        <span class="task-priority" [ngClass]="'priority-' + task.priority.toLowerCase()">
+                            {{ task.priority }}
+                        </span>
+                    </div>
+                    <div class="task-progress">
+                        <mat-progress-bar mode="determinate" [value]="task.progress"></mat-progress-bar>
+                        <span class="progress-text">{{ task.progress }}%</span>
+                    </div>
+                    <div class="task-meta">
+                        <span class="task-status">{{ task.status }}</span>
+                        <span class="task-owner">{{ task.owner }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="!isLoading && recentTasks.length === 0" class="empty-state">
+                <mat-icon>assignment</mat-icon>
+                <p>No recent tasks to display.</p>
+                <button mat-raised-button color="primary" routerLink="/tasks">Create Your First Task</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analytics View -->
+    <div *ngIf="isAnalyticsView" class="analytics-view">
+        <div class="analytics-header">
+            <h2>Analytics</h2>
+            <p class="analytics-subtitle">Detailed insights into your task management performance.</p>
+        </div>
+
+        <div class="analytics-grid">
+            <div class="analytics-card">
+                <h3>Task Overview</h3>
+                <div class="chart-placeholder">
+                    <mat-icon>pie_chart</mat-icon>
+                    <p>Task Status Distribution</p>
+                </div>
+            </div>
+            
+            <div class="analytics-card">
+                <h3>Progress Trends</h3>
+                <div class="chart-placeholder">
+                    <mat-icon>show_chart</mat-icon>
+                    <p>Completion Rate Over Time</p>
+                </div>
+            </div>
+            
+            <div class="analytics-card">
+                <h3>Performance Metrics</h3>
+                <div class="metrics-list">
+                    <div class="metric-item">
+                        <span class="metric-label">Average Completion Time</span>
+                        <span class="metric-value">3.2 days</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Tasks Completed This Week</span>
+                        <span class="metric-value">{{ getCompletedTasks() }}</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Productivity Score</span>
+                        <span class="metric-value">85%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="analytics-card">
+                <h3>Priority Distribution</h3>
+                <div class="priority-breakdown">
+                    <div class="priority-item">
+                        <span class="priority-dot high"></span>
+                        <span>High Priority: {{ getHighPriorityTasks() }}</span>
+                    </div>
+                    <div class="priority-item">
+                        <span class="priority-dot medium"></span>
+                        <span>Medium Priority: {{ getMediumPriorityTasks() }}</span>
+                    </div>
+                    <div class="priority-item">
+                        <span class="priority-dot low"></span>
+                        <span>Low Priority: {{ getLowPriorityTasks() }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,370 @@
+/* ===========================
+   Animated Sidebar Design
+=========================== */
+
+.sidebar {
+    width: 280px;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        4px 0 20px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+
+    /* Animated Background Elements */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+        animation: sidebarFloat 15s ease-in-out infinite;
+        z-index: 0;
+    }
+
+    /* Sidebar Header */
+    .sidebar-header {
+        position: relative;
+        z-index: 1;
+        padding: 30px 20px 20px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 8px;
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+                filter: brightness(0) invert(1);
+                animation: logoPulse 3s ease-in-out infinite;
+            }
+
+            .logo-text {
+                font-size: 24px;
+                font-weight: 700;
+                background: linear-gradient(135deg, #fff, #f0f0f0);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                margin: 0;
+                letter-spacing: 1px;
+            }
+        }
+
+        .logo-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+    }
+
+    /* Sidebar Content */
+    .sidebar-content {
+        position: relative;
+        z-index: 1;
+        padding: 20px 0;
+        flex: 1;
+
+        .nav-menu {
+    list-style: none;
+    padding: 0;
+            margin: 0;
+
+            .nav-item {
+                margin: 0;
+                position: relative;
+
+                .nav-link {
+                    display: flex;
+                    align-items: center;
+                    padding: 16px 24px;
+                    color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    position: relative;
+                    overflow: hidden;
+                    border-left: 3px solid transparent;
+
+                    /* Shimmer Effect */
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: -100%;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+                        transition: left 0.5s;
+                    }
+
+                    &:hover {
+                        color: white;
+                        background: rgba(255, 255, 255, 0.1);
+                        transform: translateX(8px);
+                        border-left-color: rgba(255, 255, 255, 0.5);
+
+                        &::before {
+                            left: 100%;
+                        }
+
+                        .nav-icon {
+                            transform: scale(1.1) rotate(5deg);
+                            color: #feca57;
+                        }
+
+                        .nav-text {
+                            transform: translateX(4px);
+                        }
+
+                        .nav-indicator {
+                            opacity: 1;
+                            transform: scaleX(1);
+                        }
+                    }
+
+            &.active {
+                        color: white;
+                        background: rgba(255, 255, 255, 0.15);
+                        border-left-color: #feca57;
+                        box-shadow: inset 0 0 20px rgba(254, 202, 87, 0.1);
+
+                        .nav-icon {
+                            color: #feca57;
+                        }
+
+                        .nav-indicator {
+                            opacity: 1;
+                            transform: scaleX(1);
+                        }
+                    }
+
+                    .nav-icon {
+                        font-size: 20px;
+                        width: 20px;
+                        height: 20px;
+                        margin-right: 12px;
+                        transition: all 0.3s ease;
+                        color: rgba(255, 255, 255, 0.7);
+                    }
+
+                    .nav-text {
+                        font-size: 16px;
+                        font-weight: 500;
+                        transition: transform 0.3s ease;
+                        flex: 1;
+                    }
+
+                    .nav-indicator {
+                        position: absolute;
+                        right: 0;
+                        top: 50%;
+                        transform: translateY(-50%) scaleX(0);
+                        width: 4px;
+                        height: 20px;
+                        background: linear-gradient(135deg, #feca57, #ff9ff3);
+                        border-radius: 2px;
+                        opacity: 0;
+                        transition: all 0.3s ease;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Sidebar Footer */
+    .sidebar-footer {
+        position: relative;
+        z-index: 1;
+        padding: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            .user-avatar {
+                width: 40px;
+                height: 40px;
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+                mat-icon {
+                    color: white;
+                    font-size: 20px;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .user-details {
+                flex: 1;
+
+                .user-name {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: white;
+                    margin-bottom: 2px;
+                }
+
+                .user-status {
+                    font-size: 12px;
+                    color: #4ade80;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+
+                    &::before {
+                        content: '';
+                        width: 6px;
+                        height: 6px;
+                        background: #4ade80;
+                        border-radius: 50%;
+                        animation: statusPulse 2s ease-in-out infinite;
+                    }
+                }
+            }
+        }
+
+        .logout-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+                background: linear-gradient(135deg, #ff5252, #d32f2f);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+
+            mat-icon {
+                font-size: 18px;
+                width: 18px;
+                height: 18px;
+            }
+        }
+    }
+}
+
+/* ===========================
+   Keyframe Animations
+=========================== */
+@keyframes sidebarFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+        transform: translateY(-10px) rotate(0.5deg);
+    }
+    66% {
+        transform: translateY(5px) rotate(-0.5deg);
+    }
+}
+
+@keyframes logoPulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: brightness(0) invert(1);
+    }
+    50% {
+        transform: scale(1.05);
+        filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    }
+}
+
+@keyframes statusPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.2);
+    }
+}
+
+/* ===========================
+   Responsive Design
+=========================== */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+
+        .sidebar-header {
+            padding: 20px 16px;
+
+            .logo-container {
+                .logo-text {
+                    font-size: 20px;
+                }
+            }
+        }
+
+        .sidebar-content {
+            .nav-menu {
+                .nav-item {
+                    .nav-link {
+                        padding: 14px 20px;
+
+                        .nav-text {
+                            font-size: 15px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .sidebar-footer {
+            padding: 16px;
+
+            .user-info {
+                padding: 10px;
+            }
+        }
+    }
+}

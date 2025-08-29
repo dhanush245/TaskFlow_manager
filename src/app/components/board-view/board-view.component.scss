@@ -1,0 +1,83 @@
+.board-dropzone {
+    min-height: 40px;
+}
+
+.board-task {
+    position: relative;
+    
+    .board-task-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 0.5rem;
+        
+        .board-task-title {
+            font-weight: 600;
+            flex: 1;
+            margin-right: 0.5rem;
+        }
+        
+        .board-task-actions {
+            display: flex;
+            gap: 0.25rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            
+            .action-btn {
+                width: 24px;
+                height: 24px;
+                line-height: 24px;
+                
+                mat-icon {
+                    font-size: 16px;
+                    width: 16px;
+                    height: 16px;
+                    line-height: 16px;
+                }
+                
+                &.edit-btn {
+                    color: #2196f3;
+                    
+                    &:hover {
+                        background-color: rgba(33, 150, 243, 0.1);
+                    }
+                }
+                
+                &.delete-btn {
+                    color: #f44336;
+                    
+                    &:hover {
+                        background-color: rgba(244, 67, 54, 0.1);
+                    }
+                }
+            }
+        }
+    }
+    
+    &:hover {
+        .board-task-actions {
+            opacity: 1;
+        }
+    }
+    
+    .board-task-description {
+        font-size: 0.875rem;
+        color: #666;
+        margin: 0.5rem 0;
+        line-height: 1.4;
+    }
+}
+
+.board-task-title {
+    font-weight: 600;
+    margin-bottom: .25rem;
+}
+
+.board-empty {
+    text-align: center;
+    font-size: .9rem;
+    color: #8a8a8a;
+    padding: .5rem;
+    border: 1px dashed #e0e0e0;
+    border-radius: 6px;
+}

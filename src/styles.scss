@@ -1,293 +1,1376 @@
-<style>
-  :host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+/* ===========================
+   Global Theme Variables
+=========================== */
+$primary-color: #1976d2;
+$primary-dark: #1565c0;
+$accent-color: #0288d1;
+$warn-color: #d32f2f;
+$background-color: #f4f6f8;
+$text-color: #333;
+$card-bg: #ffffff;
+$border-radius: 8px;
+$shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+$shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 8px 0;
-  }
-
-  p {
+/* ===========================
+   Reset & Base Styles
+=========================== */
+body {
+    font-family: 'Roboto', sans-serif;
     margin: 0;
-  }
+    padding: 0;
+    background-color: $background-color;
+    color: $text-color;
+}
 
-  .spacer {
-    flex: 1;
-  }
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    font-weight: 500;
+}
 
-  .toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
+button {
+    font-family: inherit;
+}
+
+/* ===========================
+   Login Page
+=========================== */
+.login-container {
     display: flex;
+    justify-content: center;
     align-items: center;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
+    height: 100vh;
+    background: linear-gradient(135deg, $primary-color, $accent-color);
+}
+
+.login-card {
+    background: $card-bg;
+    padding: 30px;
+    border-radius: $border-radius;
+    box-shadow: $shadow-light;
+    width: 400px;
+    max-width: 90%;
+
+    h2 {
+        text-align: center;
+        color: $primary-color;
+        margin-bottom: 20px;
+    }
+
+    mat-form-field {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .login-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+            width: 48%;
+        }
+    }
+
+    .google-login {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+
+        button {
+            background: #fff;
+            color: #444;
+            border: 1px solid #ddd;
+            width: 100%;
+            text-transform: none;
+
+            &:hover {
+                box-shadow: $shadow-light;
+            }
+        }
+    }
+}
+
+/* ===========================
+   AI Chat Dialog Panel
+=========================== */
+.ai-chat-dialog-panel {
+  .mat-dialog-container {
+    padding: 0 !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
+/* ===========================
+   Notification Menu Panel
+=========================== */
+.notification-menu {
+  .mat-menu-panel {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    overflow: hidden !important;
   }
 
-  .toolbar img {
-    margin: 0 16px;
+  .mat-menu-content {
+    padding: 0 !important;
   }
 
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 8px;
-  }
+  /* Enhanced Notification Items */
+  .notification-item {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    padding: 20px !important;
+    cursor: pointer !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95)) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 12px !important;
+    margin: 8px 12px !important;
+    border: 2px solid rgba(102, 126, 234, 0.15) !important;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.1) !important;
 
-  .toolbar #youtube-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
+    &:hover {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15), rgba(240, 147, 251, 0.1)) !important;
+      transform: translateX(8px) scale(1.05) !important;
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3) !important;
+      border-color: rgba(102, 126, 234, 0.4) !important;
+    }
 
-  .toolbar #twitter-logo:hover,
-  .toolbar #youtube-logo:hover {
+    .notification-icon {
+      color: #667eea !important;
+      font-size: 28px !important;
+      width: 28px !important;
+      height: 28px !important;
+      margin-top: 2px !important;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.25)) !important;
+      border-radius: 50% !important;
+      padding: 12px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      position: relative !important;
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3) !important;
+      filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.4)) !important;
+      overflow: hidden !important;
+      animation: iconFloat 3s ease-in-out infinite !important;
+
+      &.icon-task {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.3)) !important;
+        animation: taskIconPulse 2s ease-in-out infinite, iconFloat 3s ease-in-out infinite !important;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5) !important;
+        filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.4)) !important;
+        color: #667eea !important;
+      }
+
+      &.icon-project {
+        background: linear-gradient(135deg, rgba(76, 175, 80, 0.4), rgba(139, 195, 74, 0.3)) !important;
+        animation: projectIconPulse 2s ease-in-out infinite, iconFloat 3s ease-in-out infinite !important;
+        box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5) !important;
+        filter: drop-shadow(0 4px 8px rgba(76, 175, 80, 0.4)) !important;
+        color: #4caf50 !important;
+      }
+
+      &.icon-system {
+        background: linear-gradient(135deg, rgba(255, 152, 0, 0.4), rgba(255, 193, 7, 0.3)) !important;
+        animation: systemIconPulse 2s ease-in-out infinite, iconFloat 3s ease-in-out infinite !important;
+        box-shadow: 0 8px 25px rgba(255, 152, 0, 0.5) !important;
+        filter: drop-shadow(0 4px 8px rgba(255, 152, 0, 0.4)) !important;
+        color: #ff9800 !important;
+      }
+    }
+
+    .notification-title {
+      font-size: 15px !important;
+      font-weight: 700 !important;
+      color: #333 !important;
+      margin-bottom: 6px !important;
+      transition: all 0.3s ease !important;
+      line-height: 1.3 !important;
+      position: relative !important;
+      animation: titleGlow 4s ease-in-out infinite !important;
+    }
+
+    .notification-message {
+      font-size: 13px !important;
+      color: #666 !important;
+      margin-bottom: 6px !important;
+      line-height: 1.5 !important;
+      transition: all 0.3s ease !important;
+      position: relative !important;
+      animation: messageFloat 5s ease-in-out infinite !important;
+    }
+
+    .notification-time {
+      font-size: 11px !important;
+      color: #999 !important;
+      transition: all 0.3s ease !important;
+      animation: timePulse 3s ease-in-out infinite !important;
+    }
+
+    .notification-indicator {
+      width: 8px !important;
+      height: 8px !important;
+      border-radius: 50% !important;
+      background: #667eea !important;
+      position: absolute !important;
+      top: 20px !important;
+      right: 20px !important;
+      animation: indicatorPulse 2s ease-in-out infinite !important;
+    }
+  }
+}
+
+/* Notification Animations */
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.05);
+  }
+}
+
+@keyframes taskIconPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.7);
+  }
+}
+
+@keyframes projectIconPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(76, 175, 80, 0.7);
+  }
+}
+
+@keyframes systemIconPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(255, 152, 0, 0.7);
+  }
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 0 0 0 rgba(102, 126, 234, 0);
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
+  }
+}
+
+@keyframes messageFloat {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(1px);
+  }
+}
+
+@keyframes timePulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes indicatorPulse {
+  0%, 100% {
+    transform: scale(1);
     opacity: 0.8;
   }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
 
-  .content {
+/* ===========================
+   Task Page
+=========================== */
+.task-page {
+    padding: 20px;
     display: flex;
-    margin: 82px auto 32px;
-    padding: 0 16px;
-    max-width: 960px;
     flex-direction: column;
-    align-items: center;
-  }
+    gap: 20px;
+}
 
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
-
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
-  }
-
-  .card svg.material-icons path {
-    fill: #888;
-  }
-
-  .card-container {
+/* Toolbar */
+.task-actions {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-  }
+    background: $card-bg;
+    padding: 15px;
+    border-radius: $border-radius;
+    box-shadow: $shadow-light;
 
-  .card {
-    all: unset;
-    border-radius: 4px;
-    border: 1px solid #eee;
-    background-color: #fafafa;
-    height: 40px;
-    width: 200px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
-  }
+    .left-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
 
-  .card-container .card:not(:last-child) {
-    margin-right: 0;
-  }
+    .right-buttons {
+        display: flex;
+        gap: 10px;
+    }
 
-  .card.card-small {
-    height: 16px;
-    width: 168px;
-  }
+    mat-form-field {
+        min-width: 180px;
+    }
+}
 
-  .card-container .card:not(.highlight-card) {
-    cursor: pointer;
-  }
-
-  .card-container .card:not(.highlight-card):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
-  }
-
-  .card-container .card:not(.highlight-card):hover .material-icons path {
-    fill: rgb(105, 103, 103);
-  }
-
-  .card.highlight-card {
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-    border: none;
-    width: auto;
-    min-width: 30%;
-    position: relative;
-  }
-
-  .card.card.highlight-card span {
-    margin-left: 60px;
-  }
-
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
-
-  svg#rocket-smoke {
-    height: calc(100vh - 95px);
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
-
-  .terminal {
-    position: relative;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 6px;
-    padding-top: 45px;
-    margin-top: 8px;
-    overflow: hidden;
-    background-color: rgb(15, 15, 16);
-  }
-
-  .terminal::before {
-    content: "\2022 \2022 \2022";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: rgb(58, 58, 58);
-    color: #c2c3c4;
+/* Table View */
+.full-width-table {
     width: 100%;
-    font-size: 2rem;
-    line-height: 0;
-    padding: 14px 0;
-    text-indent: 4px;
-  }
+    background: $card-bg;
+    border-radius: $border-radius;
+    overflow: hidden;
+    box-shadow: $shadow-light;
 
-  .terminal pre {
-    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-    color: white;
-    padding: 0 1rem 1rem;
+    th {
+        background: $primary-color;
+        color: white;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    td {
+        padding: 12px;
+    }
+
+    tr:nth-child(even) {
+        background: #f9f9f9;
+    }
+
+    tr:hover {
+        background: #eef3fc;
+    }
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #777;
+    margin-top: 20px;
+}
+
+/* ===========================
+   Board View (Vertical)
+=========================== */
+.board-view {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 15px;
+
+    .board-column {
+        flex: 0 0 300px;
+        background: $card-bg;
+        padding: 15px;
+        border-radius: $border-radius;
+        box-shadow: $shadow-light;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h3 {
+            text-align: center;
+            background: $primary-color;
+            color: white;
+            padding: 10px;
+            border-radius: $border-radius;
+            font-size: 1.1rem;
+        }
+
+        .board-task {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: $border-radius;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            cursor: grab;
+            transition: box-shadow 0.3s ease;
+
+            &:hover {
+                box-shadow: $shadow-hover;
+            }
+
+            strong {
+                font-size: 1rem;
+                color: $primary-color;
+            }
+
+            p {
+                margin: 0;
+                font-size: 0.9rem;
+            }
+
+            mat-progress-bar {
+                height: 6px;
+                border-radius: 3px;
+            }
+        }
+
+        .board-empty {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            padding: 10px;
+        }
+    }
+}
+
+/* ===========================
+   Settings Button
+=========================== */
+.settings-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+
+    button {
+        background-color: $primary-color;
+        color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+            background-color: $primary-dark;
+        }
+    }
+}
+
+/* ===========================
+   Scrollbar for Board
+=========================== */
+.board-view::-webkit-scrollbar {
+    height: 8px;
+}
+
+.board-view::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+/* ✅ Global Reset for Consistency */
+* {
     margin: 0;
-  }
+    padding: 0;
+    box-sizing: border-box;
+}
 
-  .circle-link {
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
-    margin: 8px;
-    background-color: white;
-    border: 1px solid #eeeeee;
+/* ===========================
+   Priority Badge (Global)
+=========================== */
+.priority-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: capitalize;
+    min-width: 80px;
+    justify-content: center;
+}
+
+.priority-high {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
+.priority-medium {
+    background-color: #fff8e1;
+    color: #f57c00;
+    border: 1px solid #ffe0b2;
+}
+
+.priority-low {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+/* ✅ Login Page Styling */
+.login-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: 1s ease-out;
-  }
+    height: calc(100vh - 64px);
+    /* Adjust for top navbar */
+    background-color: #f4f6f9;
+    padding: 20px;
+}
 
-  .circle-link:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  footer {
-    margin-top: 8px;
+.login-container {
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(180deg, #2196f3, #1976d2);
+    border-radius: 16px;
+    padding: 40px 20px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    line-height: 20px;
-  }
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 
-  footer a {
-    display: flex;
-    align-items: center;
-  }
+.login-card {
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-  .github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27,31,35,.2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-    margin-left: 4px;
+.login-card h2 {
+    margin-bottom: 20px;
+    color: #333;
     font-weight: 600;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+button[mat-raised-button] {
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.login-footer {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-footer a {
+    color: #1976d2;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+app-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ===========================
+   Login (animated global styles)
+=========================== */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    width: -webkit-fill-available;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0ea5e9 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 12s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-container::before,
+.auth-container::after {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: .18;
+    pointer-events: none;
+}
+.auth-container::before { background: #38bdf8; top: -120px; left: -120px; animation: float1 14s ease-in-out infinite; }
+.auth-container::after  { background: #60a5fa; bottom: -140px; right: -140px; animation: float2 16s ease-in-out infinite; }
+
+/* Auth layout wrapper no longer imposes white box */
+.auth-wrapper { display: contents; }
+
+/* Glass card (login) */
+.auth-card {
+    position: relative;
+    width: 100%;
+    max-width: 380px; /* slightly tighter */
+    padding: 2rem;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(2, 8, 23, 0.5);
+    color: #e5e7eb;
+    animation: fadeIn 300ms ease-out;
+    text-align: center;
+    transition: transform 180ms ease, box-shadow 220ms ease;
+    transform: translateY(-28px); /* raise a bit */
+}
+.auth-card:hover { transform: translateY(-32px); box-shadow: 0 14px 40px rgba(2, 8, 23, 0.6); }
+.auth-card:after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 18px;
+    pointer-events: none;
+    background: radial-gradient(120px 120px at 60% 20%, rgba(56,189,248,.25), transparent 60%);
+    filter: blur(18px);
+    opacity: .6;
+    animation: softGlow 4s ease-in-out infinite alternate;
+}
+
+button.primary { position: relative; overflow: hidden; }
+button.primary::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -150%; height: 100%; width: 150%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.35) 50%, transparent 100%);
+    transform: skewX(-20deg);
+    transition: left .6s ease;
+}
+button.primary:hover::after { left: 120%; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
+@keyframes gradientShift { 0% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} 100% {background-position: 0% 50%;} }
+@keyframes softGlow { from { opacity: .35;} to { opacity: .7;} }
+@keyframes float1 { 0%,100%{ transform: translateY(0) translateX(0);} 50%{ transform: translateY(30px) translateX(20px);} }
+@keyframes float2 { 0%,100%{ transform: translateY(0) translateX(0);} 50%{ transform: translateY(-25px) translateX(-15px);} }
+
+@media (prefers-reduced-motion: reduce) {
+    .auth-container, .auth-container::before, .auth-container::after, .auth-card:after,
+    button.primary::after { animation: none; transition: none; }
+}
+>>>>>>> Stashed changes
+/* ===========================
+   Global Theme Variables
+=========================== */
+$primary-color: #1976d2;
+$primary-dark: #1565c0;
+$accent-color: #0288d1;
+$warn-color: #d32f2f;
+$background-color: #f4f6f8;
+$text-color: #333;
+$card-bg: #ffffff;
+$border-radius: 8px;
+$shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+$shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+/* ===========================
+   Reset & Base Styles
+=========================== */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: $background-color;
+    color: $text-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    font-weight: 500;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* ===========================
+   Login Page
+=========================== */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, $primary-color, $accent-color);
+}
+
+.login-card {
+    background: $card-bg;
+    padding: 30px;
+    border-radius: $border-radius;
+    box-shadow: $shadow-light;
+    width: 400px;
+    max-width: 90%;
+
+    h2 {
+        text-align: center;
+        color: $primary-color;
+        margin-bottom: 20px;
+    }
+
+    mat-form-field {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .login-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+            width: 48%;
+        }
+    }
+
+    .google-login {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+
+        button {
+            background: #fff;
+            color: #444;
+            border: 1px solid #ddd;
+            width: 100%;
+            text-transform: none;
+
+            &:hover {
+                box-shadow: $shadow-light;
+            }
+        }
+    }
+}
+
+/* ===========================
+   AI Chat Dialog Panel
+=========================== */
+.ai-chat-dialog-panel {
+  .mat-dialog-container {
+    padding: 0 !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
+/* ===========================
+   Notification Menu Panel
+=========================== */
+.notification-menu {
+  .mat-menu-panel {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    overflow: hidden !important;
   }
 
-  .github-star-badge:hover {
-    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-    border-color: rgba(27,31,35,.35);
-    background-position: -.5em;
+  .mat-menu-content {
+    padding: 0 !important;
   }
 
-  .github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
-  }
+  /* Enhanced Notification Items */
+  .notification-item {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    padding: 20px !important;
+    cursor: pointer !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95)) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 12px !important;
+    margin: 8px 12px !important;
+    border: 2px solid rgba(102, 126, 234, 0.15) !important;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.1) !important;
 
-  svg#clouds {
+    &:hover {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15), rgba(240, 147, 251, 0.1)) !important;
+      transform: translateX(8px) scale(1.05) !important;
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3) !important;
+      border-color: rgba(102, 126, 234, 0.4) !important;
+    }
+
+    .notification-icon {
+      color: #667eea !important;
+      font-size: 28px !important;
+      width: 28px !important;
+      height: 28px !important;
+      margin-top: 2px !important;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.25)) !important;
+      border-radius: 50% !important;
+      padding: 12px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      position: relative !important;
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3) !important;
+      filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.4)) !important;
+      overflow: hidden !important;
+      animation: iconFloat 3s ease-in-out infinite !important;
+
+      &.icon-task {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.3)) !important;
+        animation: taskIconPulse 2s ease-in-out infinite, iconFloat 3s ease-in-out infinite !important;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5) !important;
+        filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.4)) !important;
+        color: #667eea !important;
+      }
+
+      &.icon-project {
+        background: linear-gradient(135deg, rgba(76, 175, 80, 0.4), rgba(139, 195, 74, 0.3)) !important;
+        animation: projectIconPulse 2s ease-in-out infinite, iconFloat 3s ease-in-out infinite !important;
+        box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5) !important;
+        filter: drop-shadow(0 4px 8px rgba(76, 175, 80, 0.4)) !important;
+        color: #4caf50 !important;
+      }
+
+      &.icon-system {
+        background: linear-gradient(135deg, rgba(255, 152, 0, 0.4), rgba(255, 193, 7, 0.3)) !important;
+        animation: systemIconPulse 2s ease-in-out infinite, iconFloat 3s ease-in-out infinite !important;
+        box-shadow: 0 8px 25px rgba(255, 152, 0, 0.5) !important;
+        filter: drop-shadow(0 4px 8px rgba(255, 152, 0, 0.4)) !important;
+        color: #ff9800 !important;
+      }
+    }
+
+    .notification-title {
+      font-size: 15px !important;
+      font-weight: 700 !important;
+      color: #333 !important;
+      margin-bottom: 6px !important;
+      transition: all 0.3s ease !important;
+      line-height: 1.3 !important;
+      position: relative !important;
+      animation: titleGlow 4s ease-in-out infinite !important;
+    }
+
+    .notification-message {
+      font-size: 13px !important;
+      color: #666 !important;
+      margin-bottom: 6px !important;
+      line-height: 1.5 !important;
+      transition: all 0.3s ease !important;
+      position: relative !important;
+      animation: messageFloat 5s ease-in-out infinite !important;
+    }
+
+    .notification-time {
+      font-size: 11px !important;
+      color: #999 !important;
+      transition: all 0.3s ease !important;
+      animation: timePulse 3s ease-in-out infinite !important;
+    }
+
+    .notification-indicator {
+      width: 8px !important;
+      height: 8px !important;
+      border-radius: 50% !important;
+      background: #667eea !important;
+      position: absolute !important;
+      top: 20px !important;
+      right: 20px !important;
+      animation: indicatorPulse 2s ease-in-out infinite !important;
+    }
+  }
+}
+
+/* Notification Animations */
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.05);
+  }
+}
+
+@keyframes taskIconPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.7);
+  }
+}
+
+@keyframes projectIconPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(76, 175, 80, 0.7);
+  }
+}
+
+@keyframes systemIconPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(255, 152, 0, 0.7);
+  }
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 0 0 0 rgba(102, 126, 234, 0);
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
+  }
+}
+
+@keyframes messageFloat {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(1px);
+  }
+}
+
+@keyframes timePulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes indicatorPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* ===========================
+   Task Page
+=========================== */
+.task-page {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Toolbar */
+.task-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: $card-bg;
+    padding: 15px;
+    border-radius: $border-radius;
+    box-shadow: $shadow-light;
+
+    .left-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .right-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    mat-form-field {
+        min-width: 180px;
+    }
+}
+
+/* Table View */
+.full-width-table {
+    width: 100%;
+    background: $card-bg;
+    border-radius: $border-radius;
+    overflow: hidden;
+    box-shadow: $shadow-light;
+
+    th {
+        background: $primary-color;
+        color: white;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    td {
+        padding: 12px;
+    }
+
+    tr:nth-child(even) {
+        background: #f9f9f9;
+    }
+
+    tr:hover {
+        background: #eef3fc;
+    }
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #777;
+    margin-top: 20px;
+}
+
+/* ===========================
+   Board View (Vertical)
+=========================== */
+.board-view {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 15px;
+
+    .board-column {
+        flex: 0 0 300px;
+        background: $card-bg;
+        padding: 15px;
+        border-radius: $border-radius;
+        box-shadow: $shadow-light;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h3 {
+            text-align: center;
+            background: $primary-color;
+            color: white;
+            padding: 10px;
+            border-radius: $border-radius;
+            font-size: 1.1rem;
+        }
+
+        .board-task {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: $border-radius;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            cursor: grab;
+            transition: box-shadow 0.3s ease;
+
+            &:hover {
+                box-shadow: $shadow-hover;
+            }
+
+            strong {
+                font-size: 1rem;
+                color: $primary-color;
+            }
+
+            p {
+                margin: 0;
+                font-size: 0.9rem;
+            }
+
+            mat-progress-bar {
+                height: 6px;
+                border-radius: 3px;
+            }
+        }
+
+        .board-empty {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            padding: 10px;
+        }
+    }
+}
+
+/* ===========================
+   Settings Button
+=========================== */
+.settings-button {
     position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
+    bottom: 20px;
+    left: 20px;
 
-  @media screen and (max-width: 767px) {
-    .card-container > *:not(.circle-link) ,
-    .terminal {
-      width: 100%;
-    }
+    button {
+        background-color: $primary-color;
+        color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
+        &:hover {
+            background-color: $primary-dark;
+        }
     }
+}
 
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
+/* ===========================
+   Scrollbar for Board
+=========================== */
+.board-view::-webkit-scrollbar {
+    height: 8px;
+}
 
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
+.board-view::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
 
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
-  }
-</style>
+/* ✅ Global Reset for Consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===========================
+   Priority Badge (Global)
+=========================== */
+.priority-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: capitalize;
+    min-width: 80px;
+    justify-content: center;
+}
+
+.priority-high {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
+.priority-medium {
+    background-color: #fff8e1;
+    color: #f57c00;
+    border: 1px solid #ffe0b2;
+}
+
+.priority-low {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+/* ✅ Login Page Styling */
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 64px);
+    /* Adjust for top navbar */
+    background-color: #f4f6f9;
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(180deg, #2196f3, #1976d2);
+    border-radius: 16px;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.login-card {
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-card h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 600;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+button[mat-raised-button] {
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.login-footer {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-footer a {
+    color: #1976d2;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+app-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ===========================
+   Login (animated global styles)
+=========================== */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    width: -webkit-fill-available;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0ea5e9 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 12s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-container::before,
+.auth-container::after {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: .18;
+    pointer-events: none;
+}
+.auth-container::before { background: #38bdf8; top: -120px; left: -120px; animation: float1 14s ease-in-out infinite; }
+.auth-container::after  { background: #60a5fa; bottom: -140px; right: -140px; animation: float2 16s ease-in-out infinite; }
+
+/* Auth layout wrapper no longer imposes white box */
+.auth-wrapper { display: contents; }
+
+/* Glass card (login) */
+.auth-card {
+    position: relative;
+    width: 100%;
+    max-width: 380px; /* slightly tighter */
+    padding: 2rem;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(2, 8, 23, 0.5);
+    color: #e5e7eb;
+    animation: fadeIn 300ms ease-out;
+    text-align: center;
+    transition: transform 180ms ease, box-shadow 220ms ease;
+    transform: translateY(-28px); /* raise a bit */
+}
+.auth-card:hover { transform: translateY(-32px); box-shadow: 0 14px 40px rgba(2, 8, 23, 0.6); }
+.auth-card:after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 18px;
+    pointer-events: none;
+    background: radial-gradient(120px 120px at 60% 20%, rgba(56,189,248,.25), transparent 60%);
+    filter: blur(18px);
+    opacity: .6;
+    animation: softGlow 4s ease-in-out infinite alternate;
+}
+
+button.primary { position: relative; overflow: hidden; }
+button.primary::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -150%; height: 100%; width: 150%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.35) 50%, transparent 100%);
+    transform: skewX(-20deg);
+    transition: left .6s ease;
+}
+button.primary:hover::after { left: 120%; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
+@keyframes gradientShift { 0% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} 100% {background-position: 0% 50%;} }
+@keyframes softGlow { from { opacity: .35;} to { opacity: .7;} }
+@keyframes float1 { 0%,100%{ transform: translateY(0) translateX(0);} 50%{ transform: translateY(30px) translateX(20px);} }
+@keyframes float2 { 0%,100%{ transform: translateY(0) translateX(0);} 50%{ transform: translateY(-25px) translateX(-15px);} }
+
+@media (prefers-reduced-motion: reduce) {
+    .auth-container, .auth-container::before, .auth-container::after, .auth-card:after,
+    button.primary::after { animation: none; transition: none; }
+}
+>>>>>>> Stashed changes

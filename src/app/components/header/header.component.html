@@ -1,0 +1,119 @@
+<header class="header">
+    <div class="header-left" [@slideInLeft]="{value: '*', params: {delay: 100}}">
+        <div class="brand-container" routerLink="/dashboard">
+            <img src="assets/logo.svg" alt="TaskFlow Manager" class="brand-icon" />
+            <div class="brand-text">
+                <h1 class="brand-title">TaskFlow</h1>
+                <span class="brand-subtitle">Manager</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="header-center" [@fadeIn]="{value: '*', params: {delay: 300}}">
+        <div class="breadcrumb">
+            <mat-icon class="breadcrumb-icon">{{ getBreadcrumbIcon() }}</mat-icon>
+            <span class="breadcrumb-text">{{ currentPage || 'Dashboard' }}</span>
+        </div>
+    </div>
+    
+    <div class="header-right" [@slideInRight]="{value: '*', params: {delay: 200}}">
+        <div class="header-actions">
+            <!-- Notifications -->
+            <button class="action-btn notification-btn" mat-icon-button 
+                    [matMenuTriggerFor]="notificationMenu" 
+                    (click)="markNotificationsAsRead()"
+                    [@notificationShake]="unreadNotifications > 0 ? 'shake' : 'idle'">
+                <mat-icon [@notificationIcon]="unreadNotifications > 0 ? 'active' : 'idle'">notifications</mat-icon>
+                <span class="notification-badge" 
+                      *ngIf="unreadNotifications > 0"
+                      [@notificationBadge]="'bounce'">
+                    {{ unreadNotifications }}
+                </span>
+            </button>
+            
+            <mat-menu #notificationMenu="matMenu" class="notification-menu">
+                <div class="notification-header">
+                    <h3>Notifications</h3>
+                    <button mat-button color="primary" (click)="markAllAsRead()">Mark all as read</button>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="notification-list">
+                    <div *ngFor="let notification of notifications; let i = index" 
+                         class="notification-item" 
+                         [ngClass]="{'unread': !notification.read}"
+                         [class]="'notification-item-' + i"
+                         (click)="handleNotificationClick(notification)"
+                         [@notificationItem]="'slideIn'"
+                         [style.--animation-delay]="(i * 0.1) + 's'">
+                        <mat-icon class="notification-icon" 
+                                 [@notificationIconSpin]="!notification.read ? 'spin' : 'idle'"
+                                 [ngClass]="'icon-' + notification.type">
+                            {{ notification.icon }}
+                        </mat-icon>
+                        <div class="notification-content">
+                            <div class="notification-title" [ngClass]="'title-' + notification.type">
+                                {{ notification.title }}
+                            </div>
+                            <div class="notification-message" [ngClass]="'message-' + notification.type">
+                                {{ notification.message }}
+                            </div>
+                            <div class="notification-time" [ngClass]="'time-' + notification.type">
+                                {{ notification.time }}
+                            </div>
+                        </div>
+                        <div class="notification-indicator" *ngIf="!notification.read" [ngClass]="'indicator-' + notification.type"></div>
+                    </div>
+                    <div *ngIf="notifications.length === 0" class="no-notifications">
+                        <mat-icon>notifications_none</mat-icon>
+                        <p>No notifications</p>
+                    </div>
+                </div>
+            </mat-menu>
+            
+            
+              
+              <!-- User Menu -->
+            <div class="user-menu" [matMenuTriggerFor]="userMenu">
+                <div class="user-avatar">
+                    <mat-icon>person</mat-icon>
+                </div>
+                <div class="user-info">
+                    <div class="user-name">{{ username || 'User' }}</div>
+                    <div class="user-role">{{ userRole }}</div>
+                </div>
+                <button class="menu-toggle">
+                    <mat-icon>expand_more</mat-icon>
+                </button>
+            </div>
+            
+            <mat-menu #userMenu="matMenu" class="user-dropdown-menu">
+                <div class="user-menu-header">
+                    <div class="user-avatar-large">
+                        <mat-icon class="user-avatar-icon">person</mat-icon>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name-large">{{ username || 'User' }}</div>
+                        <div class="user-email">{{ userEmail }}</div>
+                    </div>
+                </div>
+                <mat-divider class="user-divider"></mat-divider>
+                <button mat-menu-item routerLink="/profile" class="user-menu-item user-menu-item-profile">
+                    <mat-icon class="menu-item-icon">account_circle</mat-icon>
+                    <span class="menu-item-text">Profile</span>
+                </button>
+                <button mat-menu-item routerLink="/settings" class="user-menu-item user-menu-item-settings">
+                    <mat-icon class="menu-item-icon">settings</mat-icon>
+                    <span class="menu-item-text">Settings</span>
+                </button>
+
+                <mat-divider class="user-divider"></mat-divider>
+                <button mat-menu-item (click)="logout()" class="user-menu-item user-menu-item-logout logout-menu-item">
+                    <mat-icon class="menu-item-icon">logout</mat-icon>
+                    <span class="menu-item-text">Logout</span>
+                </button>
+            </mat-menu>
+            
+
+        </div>
+    </div>
+</header>

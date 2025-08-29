@@ -1,0 +1,476 @@
+<div class="settings-container">
+    <!-- Settings Header with Navigation -->
+    <div class="settings-header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="header-icon">
+                    <mat-icon>settings</mat-icon>
+                </div>
+                <div class="header-text">
+                    <h1>Settings</h1>
+                    <p>Customize your TaskFlow Manager experience</p>
+                </div>
+            </div>
+            
+            <!-- Settings Navigation -->
+            <div class="settings-navigation">
+                <div class="nav-item" 
+                     [class.active]="activeSection === 'profile'"
+                     (click)="setActiveSection('profile')">
+                    <mat-icon>person</mat-icon>
+                    <span>Profile</span>
+                </div>
+                <div class="nav-item" 
+                     [class.active]="activeSection === 'analytics'"
+                     (click)="setActiveSection('analytics')">
+                    <mat-icon>analytics</mat-icon>
+                    <span>Analytics</span>
+                </div>
+                <div class="nav-item" 
+                     [class.active]="activeSection === 'notifications'"
+                     (click)="setActiveSection('notifications')">
+                    <mat-icon>notifications</mat-icon>
+                    <span>Notifications</span>
+                </div>
+                <div class="nav-item" 
+                     [class.active]="activeSection === 'appearance'"
+                     (click)="setActiveSection('appearance')">
+                    <mat-icon>palette</mat-icon>
+                    <span>Appearance</span>
+                </div>
+                <div class="nav-item" 
+                     [class.active]="activeSection === 'security'"
+                     (click)="setActiveSection('security')">
+                    <mat-icon>security</mat-icon>
+                    <span>Security</span>
+                </div>
+                <div class="nav-item" 
+                     [class.active]="activeSection === 'privacy'"
+                     (click)="setActiveSection('privacy')">
+                    <mat-icon>privacy_tip</mat-icon>
+                    <span>Data & Privacy</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Content -->
+    <div class="settings-content" [@fadeIn]>
+        <!-- Profile Settings -->
+        <div class="settings-section" *ngIf="activeSection === 'profile'" [@slideInUp]>
+            <div class="section-header">
+                <h2>Profile Settings</h2>
+                <p>Manage your personal information and profile picture</p>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-image-section">
+                    <div class="profile-image-container">
+                        <div class="profile-image-wrapper" (click)="onImageClick()">
+                            <img *ngIf="profileImageSrc" [src]="profileImageSrc" alt="Profile" class="profile-image" />
+                            <div *ngIf="!profileImageSrc" class="profile-placeholder">
+                                <mat-icon>person</mat-icon>
+                                <span>Upload</span>
+                            </div>
+                            <div class="upload-overlay">
+                                <mat-icon>camera_alt</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <h3>{{ profile.username }}</h3>
+                        <p>{{ profile.email }}</p>
+                        <div class="user-role">{{ profile.role }}</div>
+                    </div>
+                </div>
+
+                <div class="profile-form">
+                    <mat-form-field appearance="outline" class="animated-field">
+                        <mat-label>
+                            <mat-icon>person</mat-icon>
+                            Username
+                        </mat-label>
+            <input matInput id="username" [(ngModel)]="profile.username" />
+        </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="animated-field">
+                        <mat-label>
+                            <mat-icon>email</mat-icon>
+                            Email Address
+                        </mat-label>
+            <input matInput id="email" type="email" [(ngModel)]="profile.email" />
+        </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="animated-field">
+                        <mat-label>
+                            <mat-icon>phone</mat-icon>
+                            Phone Number
+                        </mat-label>
+                        <input matInput id="phone" [(ngModel)]="profile.phone" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="animated-field">
+                        <mat-label>
+                            <mat-icon>location_on</mat-icon>
+                            Location
+                        </mat-label>
+                        <input matInput id="location" [(ngModel)]="profile.location" />
+                    </mat-form-field>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="profile-actions" [@slideInUp]>
+                    <button mat-raised-button color="primary" (click)="saveSettings()" class="save-btn">
+                        <mat-icon>save</mat-icon>
+                        <span class="button-text">Save Changes</span>
+                    </button>
+                    <button mat-stroked-button 
+                            (click)="resetSettings()" 
+                            class="reset-btn"
+                            [disabled]="isResetting">
+                        <mat-icon *ngIf="!isResetting">refresh</mat-icon>
+                        <mat-spinner *ngIf="isResetting" diameter="16"></mat-spinner>
+                        <span class="button-text">{{ isResetting ? 'Resetting...' : 'Reset to Default' }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Settings -->
+        <div class="settings-section" *ngIf="activeSection === 'notifications'" [@fadeIn]>
+            <div class="section-header">
+                <h2>Notification Preferences</h2>
+                <p>Customize how you receive notifications</p>
+            </div>
+
+            <div class="settings-grid">
+                <div class="setting-card" *ngFor="let setting of notificationSettings">
+                    <div class="setting-header">
+                        <mat-icon>{{ setting.icon }}</mat-icon>
+                        <div class="setting-info">
+                            <h3>{{ setting.title }}</h3>
+                            <p>{{ setting.description }}</p>
+                        </div>
+                    </div>
+                    <mat-slide-toggle 
+                        [(ngModel)]="setting.enabled"
+                        color="primary"
+                        class="setting-toggle">
+                    </mat-slide-toggle>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appearance Settings -->
+        <div class="settings-section" *ngIf="activeSection === 'appearance'" [@fadeIn]>
+            <div class="section-header">
+                <h2>Appearance</h2>
+                <p>Customize the look and feel of your application</p>
+            </div>
+
+            <div class="settings-grid">
+                <div class="setting-card">
+                    <div class="setting-header">
+                        <mat-icon>dark_mode</mat-icon>
+                        <div class="setting-info">
+                            <h3>Dark Mode</h3>
+                            <p>Switch between light and dark themes</p>
+                        </div>
+                    </div>
+                    <mat-slide-toggle 
+                        [(ngModel)]="profile.darkMode"
+                        color="primary"
+                        (change)="toggleDarkMode()"
+                        class="setting-toggle">
+                    </mat-slide-toggle>
+                </div>
+
+                <div class="setting-card">
+                    <div class="setting-header">
+                        <mat-icon>palette</mat-icon>
+                        <div class="setting-info">
+                            <h3>Theme Color</h3>
+                            <p>Choose your preferred color scheme</p>
+                        </div>
+                    </div>
+                    <div class="color-picker">
+                        <div class="color-option" 
+                             *ngFor="let color of themeColors"
+                             [class.active]="selectedTheme === color.name"
+                             [style.background]="color.value"
+                             (click)="selectTheme(color.name)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-card">
+                    <div class="setting-header">
+                        <mat-icon>font_download</mat-icon>
+                        <div class="setting-info">
+                            <h3>Font Size</h3>
+                            <p>Adjust the text size for better readability</p>
+                        </div>
+                    </div>
+                    <div class="font-controls">
+                        <mat-slider 
+                            [(ngModel)]="profile.fontSize"
+                            min="12"
+                            max="20"
+                            step="1"
+                            (change)="onFontSizeChange()"
+                            class="font-slider">
+                        </mat-slider>
+                        <span class="font-size-display">{{ profile.fontSize }}px</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Settings -->
+        <div class="settings-section" *ngIf="activeSection === 'security'" [@fadeIn]>
+            <div class="section-header">
+                <h2>Security</h2>
+                <p>Manage your account security settings</p>
+            </div>
+
+            <div class="settings-grid">
+                <div class="setting-card">
+                    <div class="setting-header">
+                        <mat-icon>lock</mat-icon>
+                        <div class="setting-info">
+                            <h3>Change Password</h3>
+                            <p>Update your account password</p>
+                        </div>
+                    </div>
+                    <button mat-raised-button color="primary" (click)="changePassword()">
+                        <mat-icon>key</mat-icon>
+                        Change Password
+                    </button>
+                </div>
+
+                <div class="setting-card">
+                    <div class="setting-header">
+                        <mat-icon>two_factor_authentication</mat-icon>
+                        <div class="setting-info">
+                            <h3>Two-Factor Authentication</h3>
+                            <p>Add an extra layer of security to your account</p>
+                        </div>
+                    </div>
+                    <mat-slide-toggle 
+                        [(ngModel)]="profile.twoFactorEnabled"
+                        color="primary"
+                        class="setting-toggle">
+                    </mat-slide-toggle>
+                </div>
+
+                <div class="setting-card">
+                    <div class="setting-header">
+                        <mat-icon>devices</mat-icon>
+                        <div class="setting-info">
+                            <h3>Active Sessions</h3>
+                            <p>Manage your active login sessions</p>
+                        </div>
+                    </div>
+                    <button mat-stroked-button (click)="viewActiveSessions()">
+                        <mat-icon>visibility</mat-icon>
+                        View Sessions
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data & Privacy -->
+        <div class="settings-section" *ngIf="activeSection === 'privacy'" [@fadeIn]>
+            <div class="section-header">
+                <h2>Data & Privacy</h2>
+                <p>Control your data and privacy settings</p>
+            </div>
+
+            <div class="settings-grid">
+                <div class="setting-card">
+                    <div class="setting-header">
+                        <mat-icon>download</mat-icon>
+                        <div class="setting-info">
+                            <h3>Export Data</h3>
+                            <p>Download a copy of your data</p>
+                        </div>
+                    </div>
+                    <button mat-raised-button color="accent" (click)="exportData()">
+                        <mat-icon>file_download</mat-icon>
+                        Export Data
+                    </button>
+                </div>
+
+                <div class="setting-card">
+                    <div class="setting-header">
+                        <mat-icon>delete_forever</mat-icon>
+                        <div class="setting-info">
+                            <h3>Delete Account</h3>
+                            <p>Permanently delete your account and all data</p>
+                        </div>
+                    </div>
+                    <button mat-raised-button color="warn" (click)="deleteAccount()">
+                        <mat-icon>warning</mat-icon>
+                        Delete Account
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div class="settings-section" *ngIf="activeSection === 'analytics'">
+            <div class="section-header">
+                <h2>Analytics Dashboard</h2>
+                <p>Track your productivity and performance metrics</p>
+            </div>
+
+            <!-- Analytics Actions -->
+            <div class="analytics-actions">
+                <button mat-raised-button color="primary" (click)="refreshAnalytics()">
+                    <mat-icon>refresh</mat-icon>
+                    Refresh Data
+                </button>
+                <button mat-stroked-button (click)="exportAnalyticsReport()">
+                    <mat-icon>download</mat-icon>
+                    Export Report
+        </button>
+            </div>
+
+            <!-- Analytics Grid -->
+            <div class="analytics-grid">
+                <!-- Task Statistics -->
+                <div class="analytics-card">
+                    <div class="card-header">
+                        <mat-icon>assignment</mat-icon>
+                        <h3>Task Statistics</h3>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">{{ analyticsData.taskStats.total }}</span>
+                            <span class="stat-label">Total Tasks</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">{{ analyticsData.taskStats.completed }}</span>
+                            <span class="stat-label">Completed</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">{{ analyticsData.taskStats.inProgress }}</span>
+                            <span class="stat-label">In Progress</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">{{ analyticsData.taskStats.pending }}</span>
+                            <span class="stat-label">Pending</span>
+                        </div>
+                    </div>
+                    <div class="completion-rate">
+                        <div class="rate-bar">
+                            <div class="rate-fill" [style.width.%]="getTaskCompletionRate()"></div>
+                        </div>
+                        <span class="rate-text">{{ getTaskCompletionRate() | number:'1.1-1' }}% Completion Rate</span>
+                    </div>
+                </div>
+
+                <!-- Productivity Metrics -->
+                <div class="analytics-card">
+                    <div class="card-header">
+                        <mat-icon>trending_up</mat-icon>
+                        <h3>Productivity Metrics</h3>
+                    </div>
+                    <div class="metrics-list">
+                        <div class="metric-item">
+                            <span class="metric-label">Daily Average</span>
+                            <span class="metric-value">{{ analyticsData.productivity.dailyAverage }} tasks</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Weekly Total</span>
+                            <span class="metric-value">{{ analyticsData.productivity.weeklyTotal }} tasks</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Monthly Total</span>
+                            <span class="metric-value">{{ analyticsData.productivity.monthlyTotal }} tasks</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Productivity Score</span>
+                            <span class="metric-value">{{ getProductivityScore() | number:'1.1-1' }}%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time Tracking -->
+                <div class="analytics-card">
+                    <div class="card-header">
+                        <mat-icon>schedule</mat-icon>
+                        <h3>Time Tracking</h3>
+                    </div>
+                    <div class="time-stats">
+                        <div class="time-item">
+                            <span class="time-number">{{ analyticsData.timeTracking.totalHours }}</span>
+                            <span class="time-label">Total Hours</span>
+                        </div>
+                        <div class="time-item">
+                            <span class="time-number">{{ analyticsData.timeTracking.averagePerDay }}</span>
+                            <span class="time-label">Avg Hours/Day</span>
+                        </div>
+                    </div>
+                    <div class="productivity-days">
+                        <div class="day-item">
+                            <span class="day-label">Most Productive</span>
+                            <span class="day-value">{{ analyticsData.timeTracking.mostProductiveDay }}</span>
+                        </div>
+                        <div class="day-item">
+                            <span class="day-label">Least Productive</span>
+                            <span class="day-value">{{ analyticsData.timeTracking.leastProductiveDay }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Statistics -->
+                <div class="analytics-card">
+                    <div class="card-header">
+                        <mat-icon>folder</mat-icon>
+                        <h3>Project Statistics</h3>
+                    </div>
+                    <div class="project-stats">
+                        <div class="project-item">
+                            <span class="project-number">{{ analyticsData.projectStats.activeProjects }}</span>
+                            <span class="project-label">Active Projects</span>
+                        </div>
+                        <div class="project-item">
+                            <span class="project-number">{{ analyticsData.projectStats.completedProjects }}</span>
+                            <span class="project-label">Completed</span>
+                        </div>
+                        <div class="project-item">
+                            <span class="project-number">{{ analyticsData.projectStats.totalProjects }}</span>
+                            <span class="project-label">Total Projects</span>
+                        </div>
+                    </div>
+                    <div class="success-rate">
+                        <div class="rate-bar">
+                            <div class="rate-fill" [style.width.%]="getProjectSuccessRate()"></div>
+                        </div>
+                        <span class="rate-text">{{ getProjectSuccessRate() | number:'1.1-1' }}% Success Rate</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="recent-activity">
+                <div class="activity-header">
+                    <h3>Recent Activity</h3>
+                    <span class="activity-count">{{ analyticsData.recentActivity.length }} activities</span>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item" *ngFor="let activity of analyticsData.recentActivity">
+                        <div class="activity-icon" [style.background]="getActivityIconBackground(activity.type)">
+                            <mat-icon [style.color]="getActivityIconColor(activity.type)">{{ activity.icon }}</mat-icon>
+                        </div>
+                        <div class="activity-content">
+                            <span class="activity-title">{{ activity.title }}</span>
+                            <span class="activity-time">{{ activity.time }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

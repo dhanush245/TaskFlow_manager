@@ -1,0 +1,41 @@
+<div class="floating-ai-container" [@bounce]>
+  <!-- Floating AI Button -->
+  <button 
+    class="floating-ai-button"
+    [@floatAnimation]="isHovered ? 'hover' : 'idle'"
+    [@pulse]="isPulsing ? 'pulse' : 'idle'"
+    (click)="openAiChat()"
+    (mouseenter)="onMouseEnter()"
+    (mouseleave)="onMouseLeave()"
+    (animationDone)="onPulseAnimationDone()"
+    matTooltip="AI Assistant - Get Help"
+    matTooltipPosition="right"
+    matTooltipClass="ai-tooltip">
+    
+    <!-- AI Icon -->
+    <div class="ai-icon-container">
+      <mat-icon class="ai-icon">smart_toy</mat-icon>
+    </div>
+    
+    <!-- Pulse Ring -->
+    <div class="pulse-ring" *ngIf="isPulsing"></div>
+    
+    <!-- Glow Effect -->
+    <div class="glow-effect"></div>
+  </button>
+
+  <!-- Tooltip -->
+  <div class="custom-tooltip" *ngIf="showTooltip">
+    <div class="tooltip-content">
+      <div class="tooltip-icon">
+        <mat-icon>lightbulb</mat-icon>
+      </div>
+      <div class="tooltip-text">
+        <div class="tooltip-title">AI Assistant</div>
+        <div class="tooltip-subtitle">Get help anytime!</div>
+      </div>
+    </div>
+    <div class="tooltip-arrow"></div>
+  </div>
+</div>
+

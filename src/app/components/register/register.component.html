@@ -1,0 +1,86 @@
+<div class="auth-container">
+  
+  <div class="auth-card">
+    <div class="brand">
+      <div class="logo">
+        <img src="assets/logo.svg" alt="TaskFlow Manager" />
+      </div>
+      <h1>Create Account</h1>
+      <p class="subtitle">Join us to start managing your tasks</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input 
+          id="name" 
+          type="text" 
+          placeholder="Your full name" 
+          formControlName="name"
+          required 
+        />
+        <small class="hint">Enter your full name</small>
+        <small class="error" *ngIf="f['name'].touched && f['name'].invalid">Name is required</small>
+      </div>
+
+      <div class="form-field" [ngClass]="getEmailFieldClasses()">
+        <label for="email">Email</label>
+        <div class="input-container">
+          <input 
+            #emailInput
+            id="email" 
+            type="email" 
+            placeholder="you@example.com" 
+            formControlName="email"
+            (input)="onEmailChange(emailInput.value)"
+            required 
+          />
+          <div class="validation-icon">
+            <i *ngIf="isEmailValidating" class="material-icons validating">hourglass_empty</i>
+            <i *ngIf="emailValid && emailTouched && !isEmailValidating" class="material-icons valid">check_circle</i>
+            <i *ngIf="!emailValid && emailTouched && !isEmailValidating" class="material-icons invalid">error</i>
+          </div>
+        </div>
+        <small class="hint" *ngIf="!emailError">Use a valid email address</small>
+        <small class="error" *ngIf="emailError">{{ emailError }}</small>
+      </div>
+
+      <div class="form-field">
+        <label for="password">Password</label>
+        <div class="password-container">
+          <input 
+            id="password" 
+            type="password" 
+            placeholder="Create a password" 
+            formControlName="password"
+            required 
+          />
+        </div>
+        <small class="hint">Minimum 6 characters</small>
+        <small class="error" *ngIf="f['password'].touched && f['password'].invalid">Password must be at least 6 characters</small>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+      <div class="success-message" *ngIf="success">{{ message }}</div>
+
+      <button class="primary" type="submit" [disabled]="registerForm.invalid || loading || !emailValid || success">
+        <span *ngIf="!loading && !success">Create Account</span>
+        <span *ngIf="loading">Creating account...</span>
+        <span *ngIf="success">Account Created!</span>
+      </button>
+
+      <div class="meta">
+        <a routerLink="/login">Already have an account? Sign in</a>
+      </div>
+
+      <div class="divider"><span>OR</span></div>
+
+      <button type="button" class="google-btn" (click)="googleLogin()">
+        <img src="assets/google-icon.png" alt="Google" />
+        Continue with Google
+      </button>
+
+      
+    </form>
+  </div>
+</div>
