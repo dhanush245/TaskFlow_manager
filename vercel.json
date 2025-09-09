@@ -4,7 +4,7 @@
   "framework": "angular",
   "functions": {
     "api/**": {
-      "runtime": "nodejs18.x"
+      "runtime": "nodejs18"
     }
   },
   "env": {
@@ -14,3 +14,4 @@
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
+
