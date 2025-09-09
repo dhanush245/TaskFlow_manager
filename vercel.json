@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/tasklist",
+  "outputDirectory": "dist/TaskFlow_manager",
   "framework": "angular",
   "functions": {
     "api/**": {
@@ -9,5 +9,8 @@
   },
   "env": {
     "NODE_VERSION": "18"
-  }
+  },
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }
